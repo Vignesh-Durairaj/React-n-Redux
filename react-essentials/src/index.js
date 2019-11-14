@@ -13,5 +13,20 @@ const content = React.createElement(
     'Hello World'
 );
 
-ReactDOM.render(title, document.getElementById('page-title'));
-ReactDOM.render(content, document.getElementById('title-component'));
+const listContent = React.createElement(
+    'ul', 
+    {}, 
+    React.createElement(
+        'li', 
+        {}, 
+        'Item one'
+    )
+);
+
+ReactDOM.render(
+    <div style={textStyle}>
+        <h1>Hello World</h1>
+        <p>Let's see some list of items</p>
+    </div>, 
+    document.getElementById('page-title'));
+ReactDOM.render(listContent, document.getElementById('title-component'));
