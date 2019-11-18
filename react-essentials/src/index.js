@@ -23,10 +23,22 @@ const listContent = React.createElement(
     )
 );
 
+class MessageComponent extends React.Component {
+    render() {
+        return (
+            <div>
+    <h3>This is a custom component. {this.props.msg}</h3>
+            </div>
+        )
+    }
+}
+
 ReactDOM.render(
     <div style={textStyle}>
         <h1>Hello World</h1>
         <p>Let's see some list of items</p>
     </div>, 
     document.getElementById('page-title'));
+
+ReactDOM.render(<MessageComponent msg='Hello everyone!'/>, document.getElementById('custom-component'))
 ReactDOM.render(listContent, document.getElementById('title-component'));
