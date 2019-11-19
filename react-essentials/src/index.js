@@ -6,7 +6,7 @@ let textStyle = {
 }
 
 let myData = {
-    total: 4,
+    target: 10,
     country: 3, 
     temples: 12
 }
@@ -30,6 +30,10 @@ const listContent = React.createElement(
 );
 
 class MessageComponent extends Component {
+    getAchievement = () => {
+        return this.props.countryData.country * 100 / this.props.countryData.target
+    }
+
     render() {
         console.log(this.props);
         return (
@@ -37,7 +41,9 @@ class MessageComponent extends Component {
                 <h3 style={{color:this.props.colour}}>
                     This is a custom component. {this.props.msg}. I hope you are {this.props.age} years old !
                 </h3>
-                And you have been to {this.props.countryData.country} many countries with a total of {this.props.countryData.total} and visited {this.props.countryData.temples} different temples.
+                And you have been to {this.props.countryData.country} many countries for a target of {this.props.countryData.target} and visited {this.props.countryData.temples} different temples.
+                <br />
+                Your target is achieved to {this.getAchievement()} %.
             </div>
         )
     }
