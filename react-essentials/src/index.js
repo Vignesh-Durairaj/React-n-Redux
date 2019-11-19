@@ -25,9 +25,10 @@ const listContent = React.createElement(
 
 class MessageComponent extends React.Component {
     render() {
+        console.log(this.props);
         return (
             <div>
-    <h3>This is a custom component. {this.props.msg}</h3>
+                <h3>This is a custom component. {this.props.msg}</h3>
             </div>
         )
     }
