@@ -28,7 +28,7 @@ class MessageComponent extends React.Component {
         console.log(this.props);
         return (
             <div>
-                <h3>This is a custom component. {this.props.msg}</h3>
+    <h3>This is a custom component. {this.props.msg}. I hope you are {this.props.age} years old !</h3>
             </div>
         )
     }
@@ -41,5 +41,5 @@ ReactDOM.render(
     </div>, 
     document.getElementById('page-title'));
 
-ReactDOM.render(<MessageComponent msg='Hello everyone!'/>, document.getElementById('custom-component'))
+ReactDOM.render(<MessageComponent age={32} msg='Hello everyone'/>, document.getElementById('custom-component'))
 ReactDOM.render(listContent, document.getElementById('title-component'));
