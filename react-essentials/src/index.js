@@ -47,8 +47,6 @@ const messageComponentGenerator = (propObject) => {
 }
 
 class MessageComponent extends Component {
-    
-
     render() {
         console.log(this.props);
         return messageComponentGenerator(this.props);
