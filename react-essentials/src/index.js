@@ -1,9 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component} from 'react';
+import {render} from 'react-dom';
 
 let textStyle = {
     color: 'darkgreen'
-  }
+}
+
+let myData = {
+    target: 10,
+    country: 3, 
+    temples: 12
+}
 
 const title = React.createElement('label', {}, 'React Essentials')
 
@@ -23,10 +29,36 @@ const listContent = React.createElement(
     )
 );
 
-ReactDOM.render(
+const getAchievement = (countryData) => {
+    return countryData.country * 100 / countryData.target
+}
+
+const messageComponentGenerator = (propObject) => {
+    return (
+        <div>
+            <h3 style={{color:propObject.colour}}>
+                This is a custom component. {propObject.msg}. I hope you are {propObject.age} years old !
+            </h3>
+            And you have been to {propObject.countryData.country} many countries for a target of {propObject.countryData.target} and visited {propObject.countryData.temples} different temples.
+            <br />
+            Your target is achieved to {getAchievement(propObject.countryData)} %.
+        </div>
+    )
+}
+
+class MessageComponent extends Component {
+    render() {
+        console.log(this.props);
+        return messageComponentGenerator(this.props);
+    }
+}
+
+render(
     <div style={textStyle}>
         <h1>Hello World</h1>
         <p>Let's see some list of items</p>
     </div>, 
     document.getElementById('page-title'));
-ReactDOM.render(listContent, document.getElementById('title-component'));
+
+render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData}/>, document.getElementById('custom-component'))
+render(listContent, document.getElementById('title-component'));
