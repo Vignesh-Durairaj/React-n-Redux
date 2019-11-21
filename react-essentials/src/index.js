@@ -42,7 +42,20 @@ const messageComponentGenerator = (propObject) => {
             And you have been to {propObject.countryData.country} many countries for a target of {propObject.countryData.target} and visited {propObject.countryData.temples} different temples.
             <br />
             Your target is achieved to {getAchievement(propObject.countryData)} %.
+            <hr />
+            List of countries visited : 
+            <Country name='Hong Kong'/>
+            <Country name='Singapore'/>
+            <Country name='China'/>
         </div>
+    )
+}
+
+const Country = (prop) => {
+    return (
+        <section>
+            <h5>{prop.name}</h5>
+        </section>
     )
 }
 
