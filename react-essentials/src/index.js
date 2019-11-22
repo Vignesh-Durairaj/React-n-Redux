@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 
+let countries = [
+    {"name": "Hong Kong", "city": "HK Island", "Currency": "Hong Kong Dollar"}, 
+    {"name": "Singapore", "city": "Changi", "Currency": "Singapore Dollar"}, 
+    {"name": "China", "city": "Shenzhen", "Currency": "Chinese Yuan"}, 
+    {"name": "China", "city": "Guangzhou", "Currency": "Chinese Yuan"}
+]
+
 let textStyle = {
     color: 'darkgreen'
 }
@@ -43,10 +50,7 @@ const messageComponentGenerator = (propObject) => {
             <br />
             Your target is achieved to {getAchievement(propObject.countryData)} %.
             <hr />
-            List of countries visited : 
-            <Country name='Hong Kong'/>
-            <Country name='Singapore'/>
-            <Country name='China'/>
+            {countryList(propObject.countries)}
         </div>
     )
 }
@@ -56,6 +60,16 @@ const Country = (prop) => {
         <section>
             <h5>{prop.name}</h5>
         </section>
+    )
+}
+
+const countryList = ({countryList}) =>  {
+    return (
+        <div>
+        <label>List of countries visited : </label>
+        <br />
+            {countryList.map(ctry => <Country name={ctry.name} city={ctry.city} ccy={ctry.currency}/>)}
+        </div>
     )
 }
 
@@ -73,5 +87,5 @@ render(
     </div>, 
     document.getElementById('page-title'));
 
-render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData}/>, document.getElementById('custom-component'))
+render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData} countries = {countries} />, document.getElementById('custom-component'))
 render(listContent, document.getElementById('title-component'));
