@@ -57,9 +57,10 @@ const messageComponentGenerator = (propObject) => {
 const Country = (prop) => {
     return (
         <section>
-            <h3>{prop.name}</h3><hr />
-            <h5>{prop.city}</h5><br />
+            <h3>{prop.name}</h3>
+            <h5>City visited : {prop.city}</h5>
             <h6>And used {prop.ccy}</h6>
+            <hr />
         </section>
     )
 }
@@ -68,7 +69,7 @@ const CountryListComponent = ({ctrys}) =>  {
     return (
         <div>
         <label>List of countries visited : </label>
-        <br />
+        <hr />
             {ctrys.map(
                 ctry => <Country 
                             name={ctry.name} 
