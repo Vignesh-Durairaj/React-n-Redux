@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 
+let countries = [
+    {"name": "Hong Kong", "city": "HK Island", "currency": "Hong Kong Dollar"}, 
+    {"name": "Singapore", "city": "Changi", "currency": "Singapore Dollar"}, 
+    {"name": "China", "city": "Shenzhen", "currency": "Chinese Yuan"}, 
+    {"name": "China", "city": "Guangzhou", "currency": "Chinese Yuan"}
+]
+
 let textStyle = {
     color: 'darkgreen'
 }
@@ -11,13 +18,13 @@ let myData = {
     temples: 12
 }
 
-const title = React.createElement('label', {}, 'React Essentials')
+/* const title = React.createElement('label', {}, 'React Essentials')
 
 const content = React.createElement(
     'h1', 
     {id:'title', className: 'header', style: textStyle}, 
     'Hello World'
-);
+); */
 
 const listContent = React.createElement(
     'ul', 
@@ -42,11 +49,42 @@ const messageComponentGenerator = (propObject) => {
             And you have been to {propObject.countryData.country} many countries for a target of {propObject.countryData.target} and visited {propObject.countryData.temples} different temples.
             <br />
             Your target is achieved to {getAchievement(propObject.countryData)} %.
+            <hr />
+        </div>
+    )
+}
+
+const Country = (prop) => {
+    return (
+        <section>
+            <h3>{prop.name}</h3>
+            <h5>City visited : {prop.city}</h5>
+            <h6>And used {prop.ccy}</h6>
+            <hr />
+        </section>
+    )
+}
+
+const CountryListComponent = ({ctrys}) =>  {
+    return (
+        <div>
+        <label>List of countries visited : </label>
+        <hr />
+            {ctrys.map(
+                (ctry, i) => <Country 
+                                key={i}
+                                name={ctry.name} 
+                                city={ctry.city} 
+                                ccy={ctry.currency}/>)}
         </div>
     )
 }
 
 class MessageComponent extends Component {
+    componentDidMount() {
+        document.title = 'React Essentials';
+    }
+
     render() {
         console.log(this.props);
         return messageComponentGenerator(this.props);
@@ -58,7 +96,8 @@ render(
         <h1>Hello World</h1>
         <p>Let's see some list of items</p>
     </div>, 
-    document.getElementById('page-title'));
+    document.getElementById('page-header'));
 
-render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData}/>, document.getElementById('custom-component'))
+render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData} countries = {countries} />, document.getElementById('custom-component'))
 render(listContent, document.getElementById('title-component'));
+render(<CountryListComponent ctrys = {countries} />, document.getElementById('country-list'));
