@@ -80,6 +80,10 @@ const CountryListComponent = ({ctrys}) =>  {
 }
 
 class MessageComponent extends Component {
+    componentDidMount() {
+        document.title = 'React Essentials';
+    }
+
     render() {
         console.log(this.props);
         return messageComponentGenerator(this.props);
@@ -91,7 +95,7 @@ render(
         <h1>Hello World</h1>
         <p>Let's see some list of items</p>
     </div>, 
-    document.getElementById('page-title'));
+    document.getElementById('page-header'));
 
 render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData} countries = {countries} />, document.getElementById('custom-component'))
 render(listContent, document.getElementById('title-component'));
