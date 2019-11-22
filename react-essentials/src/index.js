@@ -18,13 +18,13 @@ let myData = {
     temples: 12
 }
 
-const title = React.createElement('label', {}, 'React Essentials')
+/* const title = React.createElement('label', {}, 'React Essentials')
 
 const content = React.createElement(
     'h1', 
     {id:'title', className: 'header', style: textStyle}, 
     'Hello World'
-);
+); */
 
 const listContent = React.createElement(
     'ul', 
@@ -71,10 +71,11 @@ const CountryListComponent = ({ctrys}) =>  {
         <label>List of countries visited : </label>
         <hr />
             {ctrys.map(
-                ctry => <Country 
-                            name={ctry.name} 
-                            city={ctry.city} 
-                            ccy={ctry.currency}/>)}
+                (ctry, i) => <Country 
+                                key={i}
+                                name={ctry.name} 
+                                city={ctry.city} 
+                                ccy={ctry.currency}/>)}
         </div>
     )
 }
