@@ -65,19 +65,32 @@ const Country = (prop) => {
     )
 }
 
-const CountryListComponent = ({ctrys}) =>  {
-    return (
-        <div>
-        <label>List of countries visited : </label>
-        <hr />
-            {ctrys.map(
-                (ctry, i) => <Country 
-                                key={i}
-                                name={ctry.name} 
-                                city={ctry.city} 
-                                ccy={ctry.currency}/>)}
-        </div>
-    )
+class CountryListComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.stateObj = {
+            budget: false
+        };
+    }
+
+    render() {
+        console.log(this.stateObj);
+        const {ctrys} = this.props;
+        return (
+            <div>
+            <label>List of countries visited : </label>
+            <hr />
+                {ctrys.map(
+                    (ctry, i) => <Country 
+                                    key={i}
+                                    name={ctry.name} 
+                                    city={ctry.city} 
+                                    ccy={ctry.currency}/>)};
+            <h3>Enough money {this.stateObj.budget ? '' : 'NOT'} available for next travel</h3>
+            </div>
+        )
+    }
 }
 
 class MessageComponent extends Component {
