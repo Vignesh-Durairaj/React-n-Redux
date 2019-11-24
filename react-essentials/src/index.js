@@ -67,15 +67,14 @@ const Country = (prop) => {
 
 class CountryListComponent extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.stateObj = {
-            budget: false
-        };
-    }
+    state = {budget: true}
+
+    toggleBudget = () => this.setState(prevState => ({
+        budget: !prevState.budget
+    }));
 
     render() {
-        console.log(this.stateObj);
+        console.log(this.state);
         const {ctrys} = this.props;
         return (
             <div>
@@ -87,7 +86,8 @@ class CountryListComponent extends React.Component {
                                     name={ctry.name} 
                                     city={ctry.city} 
                                     ccy={ctry.currency}/>)};
-            <h3>Enough money {this.stateObj.budget ? '' : 'NOT'} available for next travel</h3>
+            <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
+            <button onClick={this.toggleBudget}>Click for Budget</button>
             </div>
         )
     }
