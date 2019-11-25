@@ -66,11 +66,14 @@ const Country = (prop) => {
     )
 }
 
+const FutureTravels = () => <div><p>Future travel plans are in place</p></div>
+
 class CountryListComponent extends React.Component {
 
     state = {
         budget: true,
-        fulfilledTravel: true
+        fulfilledTravel: true,
+        isFutureTravelsAvailable: true
     }
 
     toggleBudget = () => this.setState(prevState => ({
@@ -90,9 +93,10 @@ class CountryListComponent extends React.Component {
                                     name={ctry.name} 
                                     city={ctry.city} 
                                     ccy={ctry.currency} 
-                                    fulfillment={this.state.fulfilledTravel} />)};
+                                    fulfillment={this.state.fulfilledTravel} />)}
             <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
             <button onClick={this.toggleBudget}>Click for Budget</button>
+            {this.state.isFutureTravelsAvailable ? <FutureTravels /> : <div />}
             </div>
         )
     }
