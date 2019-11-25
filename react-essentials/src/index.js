@@ -60,6 +60,7 @@ const Country = (prop) => {
             <h3>{prop.name}</h3>
             <h5>City visited : {prop.city}</h5>
             <h6>And used {prop.ccy}</h6>
+    <h6>Is travel fulfilled to satisfaction : {prop.fulfillment ? 'Yes' : 'No'}</h6>
             <hr />
         </section>
     )
@@ -67,7 +68,10 @@ const Country = (prop) => {
 
 class CountryListComponent extends React.Component {
 
-    state = {budget: true}
+    state = {
+        budget: true,
+        fulfilledTravel: true
+    }
 
     toggleBudget = () => this.setState(prevState => ({
         budget: !prevState.budget
@@ -85,7 +89,8 @@ class CountryListComponent extends React.Component {
                                     key={i}
                                     name={ctry.name} 
                                     city={ctry.city} 
-                                    ccy={ctry.currency}/>)};
+                                    ccy={ctry.currency} 
+                                    fulfillment={this.state.fulfilledTravel} />)};
             <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
             <button onClick={this.toggleBudget}>Click for Budget</button>
             </div>
