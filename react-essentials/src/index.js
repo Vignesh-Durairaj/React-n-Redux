@@ -60,24 +60,46 @@ const Country = (prop) => {
             <h3>{prop.name}</h3>
             <h5>City visited : {prop.city}</h5>
             <h6>And used {prop.ccy}</h6>
+    <h6>Is travel fulfilled to satisfaction : {prop.fulfillment ? 'Yes' : 'No'}</h6>
             <hr />
         </section>
     )
 }
 
-const CountryListComponent = ({ctrys}) =>  {
-    return (
-        <div>
-        <label>List of countries visited : </label>
-        <hr />
-            {ctrys.map(
-                (ctry, i) => <Country 
-                                key={i}
-                                name={ctry.name} 
-                                city={ctry.city} 
-                                ccy={ctry.currency}/>)}
-        </div>
-    )
+const FutureTravels = () => <div><p>Future travel plans are in place</p></div>
+
+class CountryListComponent extends React.Component {
+
+    state = {
+        budget: true,
+        fulfilledTravel: true,
+        isFutureTravelsAvailable: true
+    }
+
+    toggleBudget = () => this.setState(prevState => ({
+        budget: !prevState.budget
+    }));
+
+    render() {
+        console.log(this.state);
+        const {ctrys} = this.props;
+        return (
+            <div>
+            <label>List of countries visited : </label>
+            <hr />
+                {ctrys.map(
+                    (ctry, i) => <Country 
+                                    key={i}
+                                    name={ctry.name} 
+                                    city={ctry.city} 
+                                    ccy={ctry.currency} 
+                                    fulfillment={this.state.fulfilledTravel} />)}
+            <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
+            <button onClick={this.toggleBudget}>Click for Budget</button>
+            {this.state.isFutureTravelsAvailable ? <FutureTravels /> : <div />}
+            </div>
+        )
+    }
 }
 
 class MessageComponent extends Component {
