@@ -69,6 +69,10 @@ const Country = (prop) => {
 const FutureTravels = () => <div><p>Future travel plans are in place</p></div>
 
 class CountryListComponent extends React.Component {
+    static defaultProps = {
+        ctrys : [{"name": "India", "city": "Chennai", "currency": "Indian Rupee"}]
+    }
+
     constructor() {
         super();
         console.log('Hi ! You can do something before the DOM elements are mounted.');
@@ -147,9 +151,7 @@ class MessageComponent extends Component {
 }
 
 class FavouriteColourForm extends React.Component {
-    state = {
-        value : ""
-    }
+    state = {value : ""}
 
     newColour = e => this.setState({value : e.target.value})
     submitColour = event => {
