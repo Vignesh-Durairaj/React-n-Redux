@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import {PropTypes} from 'prop-types'
+import MessageComponent from './MessageComponent';
+import CountryListComponent from './CountryListComponent';
+import FavouriteColourForm from './FavouriteColourForm';
+
 
 let countries = [
     {"name": "Hong Kong", "city": "HK Island", "currency": "Hong Kong Dollar"}, 
@@ -19,14 +22,6 @@ let myData = {
     temples: 12
 }
 
-/* const title = React.createElement('label', {}, 'React Essentials')
-
-const content = React.createElement(
-    'h1', 
-    {id:'title', className: 'header', style: textStyle}, 
-    'Hello World'
-); */
-
 const listContent = React.createElement(
     'ul', 
     {}, 
@@ -36,150 +31,6 @@ const listContent = React.createElement(
         'Item one'
     )
 );
-
-const getAchievement = (countryData) => {
-    return countryData.country * 100 / countryData.target
-}
-
-const messageComponentGenerator = (propObject) => {
-    return (
-        <div>
-            <h3 style={{color:propObject.colour}}>
-                This is a custom component. {propObject.msg}. I hope you are {propObject.age} years old !
-            </h3>
-            And you have been to {propObject.countryData.country} many countries for a target of {propObject.countryData.target} and visited {propObject.countryData.temples} different temples.
-            <br />
-            Your target is achieved to {getAchievement(propObject.countryData)} %.
-            <hr />
-        </div>
-    )
-}
-
-const Country = (prop) => {
-    return (
-        <section>
-            <h3>{prop.name}</h3>
-            <h5>City visited : {prop.city}</h5>
-            <h6>And used {prop.ccy}</h6>
-            <h6>Is travel fulfilled to satisfaction : {prop.fulfillment ? 'Yes' : 'No'}</h6>
-            <hr />
-        </section>
-    )
-}
-
-const FutureTravels = () => <div><p>Future travel plans are in place</p></div>
-
-class CountryListComponent extends React.Component {
-    static defaultProps = {
-        ctrys : [{"name": "India", "city": "Chennai", "currency": "Indian Rupee"}]
-    }
-
-    constructor() {
-        super();
-        console.log('Hi ! You can do something before the DOM elements are mounted.');
-    }
-
-    state = {
-        budget: true,
-        fulfilledTravel: true,
-        isFutureTravelsAvailable: true, 
-        data: [],
-        loaded: true
-    }
-
-    componentDidUpdate() {
-        console.log('Am about to refresh the component');
-    }
-
-    componentDidMount() {
-        this.setState({loaded: false});
-        fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/5')
-            .then(data => data.json())
-            .then(jsonData => this.setState({data: jsonData, loaded: true}));
-    }
-
-    toggleBudget = () => this.setState(prevState => ({
-        budget: !prevState.budget
-    }));
-
-    render() {
-        console.log(this.state);
-        const {ctrys} = this.props;
-        return (
-            <div>
-                <b><u>Travel product on Sales</u></b>
-                {!this.state.loaded ? "loading ..." : 
-                <div>
-                    {this.state.data.map((product, j) => {
-                        return (
-                            <div key={j}>
-                                <br />
-                                <b>{product.name}</b>
-                                <br />
-                                <img src={product.image} height={100} alt={product.image_title}/>
-                            </div>
-                        )
-                    })}
-                </div>}
-                <hr />
-                <label><b><u>List of countries visited : </u></b></label>
-                <br />
-                    {ctrys.map(
-                        (ctry, i) => <Country 
-                                        key={i}
-                                        name={ctry.name} 
-                                        city={ctry.city} 
-                                        ccy={ctry.currency} 
-                                        fulfillment={this.state.fulfilledTravel} />)}
-                <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
-                <button onClick={this.toggleBudget}>Click for Budget</button>
-                {this.state.isFutureTravelsAvailable ? <FutureTravels /> : <div />}
-            </div>
-        )
-    }
-}
-
-CountryListComponent.propTypes = {
-    ctrys: PropTypes.array
-}
-
-Country.propTypes = {
-    name: PropTypes.string,
-    city: PropTypes.string,
-    ccy: PropTypes.string, 
-    fulfilledTravel: PropTypes.bool
-}
-
-class MessageComponent extends Component {
-    componentDidMount() {
-        document.title = 'React Essentials';
-        console.log('Component is mounted. And I changed the page title');
-    }
-
-    render() {
-        console.log(this.props);
-        return messageComponentGenerator(this.props);
-    }
-}
-
-class FavouriteColourForm extends React.Component {
-    state = {value : ""}
-
-    newColour = e => this.setState({value : e.target.value})
-    submitColour = event => {
-        console.log(`New Colour : ${this.state.value}`);
-        event.preventDefault();
-    }
-    render() {
-        return (
-            <form onSubmit={this.submitColour}>
-                <label>Favourite Color : <input type="color" onChange={this.newColour}/></label>
-                <button>Click</button>
-            </form>
-        )
-    }
-}
-
 
 render(
     <div style={textStyle}>
