@@ -105,15 +105,13 @@ class CountryListComponent extends React.Component {
                 <b><u>Travel product on Sales</u></b>
                 {!this.state.loaded ? "loading ..." : 
                 <div>
-                    {this.state.data.map((product, i) => {
+                    {this.state.data.map((product, j) => {
                         return (
-                            <div>
-                                <span key={i}>
-                                    <br />
-                                    <b>{product.name}</b>
-                                    <br />
-                                    <img src={product.image} height={100} alt={product.image_title}/>
-                                </span>
+                            <div key={j}>
+                                <br />
+                                <b>{product.name}</b>
+                                <br />
+                                <img src={product.image} height={100} alt={product.image_title}/>
                             </div>
                         )
                     })}
@@ -148,6 +146,27 @@ class MessageComponent extends Component {
     }
 }
 
+class FavouriteColourForm extends React.Component {
+    state = {
+        value : ""
+    }
+
+    newColour = e => this.setState({value : e.target.value})
+    submitColour = event => {
+        console.log(`New Colour : ${this.state.value}`);
+        event.preventDefault();
+    }
+    render() {
+        return (
+            <form onSubmit={this.submitColour}>
+                <label>Favourite Color : <input type="color" onChange={this.newColour}/></label>
+                <button>Click</button>
+            </form>
+        )
+    }
+}
+
+
 render(
     <div style={textStyle}>
         <h1>Hello World</h1>
@@ -158,3 +177,4 @@ render(
 render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData} countries = {countries} />, document.getElementById('custom-component'))
 render(listContent, document.getElementById('title-component'));
 render(<CountryListComponent ctrys = {countries} />, document.getElementById('country-list'));
+render(<FavouriteColourForm />, document.getElementById('favourite-colour'));
