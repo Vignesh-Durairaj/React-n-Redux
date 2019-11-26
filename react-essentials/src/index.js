@@ -88,7 +88,7 @@ class CountryListComponent extends React.Component {
 
     componentDidMount() {
         this.setState({loaded: false});
-        fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/1')
+        fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/5')
             .then(data => data.json())
             .then(jsonData => this.setState({data: jsonData, loaded: true}));
     }
@@ -102,22 +102,25 @@ class CountryListComponent extends React.Component {
         const {ctrys} = this.props;
         return (
             <div>
+                <b><u>Travel product on Sales</u></b>
                 {!this.state.loaded ? "loading ..." : 
                 <div>
-                    {this.state.data.map(product => {
+                    {this.state.data.map((product, i) => {
                         return (
                             <div>
-                                <b><u>Travel product on Sales</u></b>
-                                <br />
-                                <b>{product.name}</b>
-                                <br />
-                                <img src={product.image} height={100} alt={product.image_title}/>
+                                <span key={i}>
+                                    <br />
+                                    <b>{product.name}</b>
+                                    <br />
+                                    <img src={product.image} height={100} alt={product.image_title}/>
+                                </span>
                             </div>
                         )
                     })}
                 </div>}
-                <label>List of countries visited : </label>
                 <hr />
+                <label><b><u>List of countries visited : </u></b></label>
+                <br />
                     {ctrys.map(
                         (ctry, i) => <Country 
                                         key={i}
