@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import {PropTypes} from 'prop-types'
 
 let countries = [
     {"name": "Hong Kong", "city": "HK Island", "currency": "Hong Kong Dollar"}, 
@@ -136,6 +137,17 @@ class CountryListComponent extends React.Component {
             </div>
         )
     }
+}
+
+CountryListComponent.propTypes = {
+    ctrys: PropTypes.array
+}
+
+Country.propTypes = {
+    name: PropTypes.string,
+    city: PropTypes.string,
+    ccy: PropTypes.string, 
+    fulfilledTravel: PropTypes.bool
 }
 
 class MessageComponent extends Component {
