@@ -60,7 +60,7 @@ const Country = (prop) => {
             <h3>{prop.name}</h3>
             <h5>City visited : {prop.city}</h5>
             <h6>And used {prop.ccy}</h6>
-    <h6>Is travel fulfilled to satisfaction : {prop.fulfillment ? 'Yes' : 'No'}</h6>
+            <h6>Is travel fulfilled to satisfaction : {prop.fulfillment ? 'Yes' : 'No'}</h6>
             <hr />
         </section>
     )
