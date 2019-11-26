@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import MessageComponent from './MessageComponent';
+import CountryListComponent from './CountryListComponent';
+import FavouriteColourForm from './FavouriteColourForm';
+
 
 let countries = [
     {"name": "Hong Kong", "city": "HK Island", "currency": "Hong Kong Dollar"}, 
@@ -18,14 +22,6 @@ let myData = {
     temples: 12
 }
 
-/* const title = React.createElement('label', {}, 'React Essentials')
-
-const content = React.createElement(
-    'h1', 
-    {id:'title', className: 'header', style: textStyle}, 
-    'Hello World'
-); */
-
 const listContent = React.createElement(
     'ul', 
     {}, 
@@ -35,83 +31,6 @@ const listContent = React.createElement(
         'Item one'
     )
 );
-
-const getAchievement = (countryData) => {
-    return countryData.country * 100 / countryData.target
-}
-
-const messageComponentGenerator = (propObject) => {
-    return (
-        <div>
-            <h3 style={{color:propObject.colour}}>
-                This is a custom component. {propObject.msg}. I hope you are {propObject.age} years old !
-            </h3>
-            And you have been to {propObject.countryData.country} many countries for a target of {propObject.countryData.target} and visited {propObject.countryData.temples} different temples.
-            <br />
-            Your target is achieved to {getAchievement(propObject.countryData)} %.
-            <hr />
-        </div>
-    )
-}
-
-const Country = (prop) => {
-    return (
-        <section>
-            <h3>{prop.name}</h3>
-            <h5>City visited : {prop.city}</h5>
-            <h6>And used {prop.ccy}</h6>
-    <h6>Is travel fulfilled to satisfaction : {prop.fulfillment ? 'Yes' : 'No'}</h6>
-            <hr />
-        </section>
-    )
-}
-
-const FutureTravels = () => <div><p>Future travel plans are in place</p></div>
-
-class CountryListComponent extends React.Component {
-
-    state = {
-        budget: true,
-        fulfilledTravel: true,
-        isFutureTravelsAvailable: true
-    }
-
-    toggleBudget = () => this.setState(prevState => ({
-        budget: !prevState.budget
-    }));
-
-    render() {
-        console.log(this.state);
-        const {ctrys} = this.props;
-        return (
-            <div>
-            <label>List of countries visited : </label>
-            <hr />
-                {ctrys.map(
-                    (ctry, i) => <Country 
-                                    key={i}
-                                    name={ctry.name} 
-                                    city={ctry.city} 
-                                    ccy={ctry.currency} 
-                                    fulfillment={this.state.fulfilledTravel} />)}
-            <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
-            <button onClick={this.toggleBudget}>Click for Budget</button>
-            {this.state.isFutureTravelsAvailable ? <FutureTravels /> : <div />}
-            </div>
-        )
-    }
-}
-
-class MessageComponent extends Component {
-    componentDidMount() {
-        document.title = 'React Essentials';
-    }
-
-    render() {
-        console.log(this.props);
-        return messageComponentGenerator(this.props);
-    }
-}
 
 render(
     <div style={textStyle}>
@@ -123,3 +42,4 @@ render(
 render(<MessageComponent age={32} msg='Hello everyone' colour='green' countryData = {myData} countries = {countries} />, document.getElementById('custom-component'))
 render(listContent, document.getElementById('title-component'));
 render(<CountryListComponent ctrys = {countries} />, document.getElementById('country-list'));
+render(<FavouriteColourForm />, document.getElementById('favourite-colour'));
