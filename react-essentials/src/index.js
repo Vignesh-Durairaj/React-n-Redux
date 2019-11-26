@@ -74,14 +74,23 @@ class CountryListComponent extends React.Component {
         console.log('Hi ! You can do something before the DOM elements are mounted.');
     }
 
-    componentDidUpdate() {
-        alert('Am about to refresh the component');
-    }
-
     state = {
         budget: true,
         fulfilledTravel: true,
-        isFutureTravelsAvailable: true
+        isFutureTravelsAvailable: true, 
+        data: [],
+        loaded: true
+    }
+
+    componentDidUpdate() {
+        console.log('Am about to refresh the component');
+    }
+
+    componentDidMount() {
+        this.setState({loaded: false});
+        fetch('https://hplussport.com/api/products/order/price/sort/asc/qty/1')
+            .then(data => data.json())
+            .then(jsonData => this.setState({data: jsonData, loaded: true}));
     }
 
     toggleBudget = () => this.setState(prevState => ({
@@ -93,18 +102,32 @@ class CountryListComponent extends React.Component {
         const {ctrys} = this.props;
         return (
             <div>
-            <label>List of countries visited : </label>
-            <hr />
-                {ctrys.map(
-                    (ctry, i) => <Country 
-                                    key={i}
-                                    name={ctry.name} 
-                                    city={ctry.city} 
-                                    ccy={ctry.currency} 
-                                    fulfillment={this.state.fulfilledTravel} />)}
-            <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
-            <button onClick={this.toggleBudget}>Click for Budget</button>
-            {this.state.isFutureTravelsAvailable ? <FutureTravels /> : <div />}
+                {!this.state.loaded ? "loading ..." : 
+                <div>
+                    {this.state.data.map(product => {
+                        return (
+                            <div>
+                                <b><u>Travel product on Sales</u></b>
+                                <br />
+                                <b>{product.name}</b>
+                                <br />
+                                <img src={product.image} height={100} alt={product.image_title}/>
+                            </div>
+                        )
+                    })}
+                </div>}
+                <label>List of countries visited : </label>
+                <hr />
+                    {ctrys.map(
+                        (ctry, i) => <Country 
+                                        key={i}
+                                        name={ctry.name} 
+                                        city={ctry.city} 
+                                        ccy={ctry.currency} 
+                                        fulfillment={this.state.fulfilledTravel} />)}
+                <h3>Enough money {this.state.budget ? '' : 'NOT'} available for next travel</h3>
+                <button onClick={this.toggleBudget}>Click for Budget</button>
+                {this.state.isFutureTravelsAvailable ? <FutureTravels /> : <div />}
             </div>
         )
     }
