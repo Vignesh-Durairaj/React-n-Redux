@@ -69,6 +69,14 @@ const Country = (prop) => {
 const FutureTravels = () => <div><p>Future travel plans are in place</p></div>
 
 class CountryListComponent extends React.Component {
+    constructor() {
+        super();
+        console.log('Hi ! You can do something before the DOM elements are mounted.');
+    }
+
+    componentDidUpdate() {
+        alert('Am about to refresh the component');
+    }
 
     state = {
         budget: true,
@@ -105,6 +113,7 @@ class CountryListComponent extends React.Component {
 class MessageComponent extends Component {
     componentDidMount() {
         document.title = 'React Essentials';
+        console.log('Component is mounted. And I changed the page title');
     }
 
     render() {
